@@ -1,0 +1,656 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>RCH ERP — Design Preview</title>
+<meta name="description" content="Static design & theme preview of the Rapid Clearing House CRM/ERP — brand tokens, components, and key screens." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  /* ============================================================
+     RCH DESIGN SYSTEM — TOKENS (verbatim from app/frontend/src/styles/globals.css)
+     ============================================================ */
+  :root {
+    --color-navy: #13283f;
+    --color-magenta: #d6286b;
+    --color-chrome: #13283f;
+
+    --color-bg: #f2f4f8;
+    --color-bg-elevated: #ffffff;
+    --color-bg-sunken: #edeff4;
+    --color-overlay: rgba(16, 24, 40, 0.5);
+
+    --color-border: #dde2ec;
+    --color-border-strong: #c9d0dd;
+    --color-border-magenta: rgba(214, 40, 107, 0.15);
+
+    --color-text-primary: #13283f;
+    --color-text-secondary: #5a6680;
+    --color-text-tertiary: #a8b0c2;
+    --color-text-inverse: #ffffff;
+
+    --color-success: #2da84f;  --color-success-text: #1f7a38;  --color-success-bg: rgba(45, 168, 79, 0.1);
+    --color-warning: #d98e1a;  --color-warning-text: #a06108;  --color-warning-bg: rgba(217, 142, 26, 0.1);
+    --color-danger:  #c24344;  --color-danger-text:  #9f3434;  --color-danger-bg:  rgba(194, 67, 68, 0.1);
+    --color-info:    #2c5f94;  --color-info-text:    #1f476e;  --color-info-bg:    rgba(44, 95, 148, 0.1);
+    --color-neutral-bg: #edeff4; --color-neutral-text: #5a6680;
+
+    --color-navy-bg: rgba(19, 40, 63, 0.08);
+    --color-magenta-bg: rgba(214, 40, 107, 0.1);
+    --color-magenta-bg-strong: rgba(214, 40, 107, 0.15);
+
+    --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", Roboto, sans-serif;
+    --font-arabic: "IBM Plex Sans Arabic", system-ui, sans-serif;
+    --font-mono: "Fira Code", ui-monospace, "SF Mono", Menlo, monospace;
+
+    --radius-sm: 0.25rem; --radius-md: 0.375rem; --radius-lg: 0.5rem;
+    --radius-xl: 0.75rem; --radius-2xl: 1rem; --radius-full: 9999px;
+
+    --shadow-card: 0 0 0 1px #dde2ec;
+    --shadow-card-hover: 0 1px 3px rgba(16, 24, 40, 0.05), 0 0 0 1px #c9d0dd;
+    --shadow-popover: 0 4px 16px rgba(16, 24, 40, 0.08), 0 0 0 1px #dde2ec;
+    --shadow-dialog: 0 16px 48px rgba(16, 24, 40, 0.14), 0 0 0 1px #dde2ec;
+
+    --ring-focus: 0 0 0 3px rgba(214, 40, 107, 0.15);
+    --motion-fast: 150ms;
+    --gradient-hero-glow: radial-gradient(circle at top right, rgba(214, 40, 107, 0.25) 0%, transparent 60%);
+  }
+
+  * { box-sizing: border-box; }
+  html {
+    font-family: var(--font-sans);
+    color: var(--color-text-primary);
+    background-color: var(--color-bg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  body { margin: 0; line-height: 1.5; }
+  h1,h2,h3,h4 { color: var(--color-navy); letter-spacing: -0.02em; line-height: 1.1; font-weight: 700; margin: 0; }
+  a { color: var(--color-magenta); text-decoration: none; }
+
+  /* ---------- Document scaffolding (the preview page itself) ---------- */
+  .doc { max-width: 1180px; margin: 0 auto; padding: 0 24px 96px; }
+  .doc-hero {
+    background: var(--color-navy);
+    color: #fff;
+    padding: 56px 24px 64px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 3px solid var(--color-magenta);
+  }
+  .doc-hero::after {
+    content: ""; position: absolute; inset: 0;
+    background: var(--gradient-hero-glow); opacity: 0.9; pointer-events: none;
+  }
+  .doc-hero .inner { position: relative; max-width: 1180px; margin: 0 auto; }
+  .doc-hero h1 { color: #fff; font-size: 2.5rem; font-weight: 800; letter-spacing: -0.03em; }
+  .doc-hero h1 .reg { color: var(--color-magenta); }
+  .doc-hero .tagline { letter-spacing: 0.34em; font-size: 0.7rem; font-weight: 600; color: #f0a8c4; text-transform: uppercase; margin-top: 10px; }
+  .doc-hero p { color: rgba(255,255,255,0.7); font-size: 0.95rem; max-width: 560px; margin: 18px auto 0; line-height: 1.6; }
+  .doc-hero .meta { margin-top: 22px; font-size: 0.72rem; color: rgba(255,255,255,0.45); letter-spacing: 0.04em; }
+
+  .section { margin-top: 64px; }
+  .section-head { margin-bottom: 24px; }
+  .section-eyebrow { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.16em; color: var(--color-magenta); }
+  .section-head h2 { font-size: 1.6rem; font-weight: 800; margin-top: 6px; }
+  .section-head p { color: var(--color-text-secondary); font-size: 0.92rem; margin: 8px 0 0; max-width: 640px; }
+
+  /* ---------- Token grids ---------- */
+  .swatch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)); gap: 14px; }
+  .swatch { border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-card); background: #fff; }
+  .swatch .chip { height: 76px; }
+  .swatch .info { padding: 10px 12px; }
+  .swatch .name { font-size: 0.8rem; font-weight: 700; color: var(--color-navy); }
+  .swatch .hex { font-size: 0.72rem; font-family: var(--font-mono); color: var(--color-text-secondary); text-transform: uppercase; margin-top: 2px; }
+
+  .type-card, .token-card { background: #fff; border-radius: var(--radius-2xl); box-shadow: var(--shadow-card); padding: 26px 28px; }
+  .type-row { display: flex; align-items: baseline; gap: 18px; padding: 12px 0; border-bottom: 1px solid var(--color-bg-sunken); }
+  .type-row:last-child { border-bottom: 0; }
+  .type-row .lbl { width: 150px; flex: none; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-tertiary); }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media (max-width: 760px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* ---------- Shared RCH component classes (mirror of globals.css) ---------- */
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; font-weight: 500; border-radius: var(--radius-md); border: 0; cursor: pointer; white-space: nowrap; height: 2.75rem; padding: 0 1.25rem; font-size: 0.875rem; transition: all var(--motion-fast) ease; font-family: inherit; }
+  .btn-sm { height: 2.25rem; padding: 0 0.75rem; font-size: 0.75rem; }
+  .btn-primary { background: var(--color-magenta); color: #fff; }
+  .btn-primary:hover { opacity: 0.9; }
+  .btn-secondary { background: #fff; color: var(--color-navy); border: 1px solid var(--color-border); }
+  .btn-ghost { background: transparent; color: var(--color-navy); }
+
+  .pill { display: inline-flex; align-items: center; gap: 0.375rem; padding: 0.25rem 0.625rem; border-radius: var(--radius-full); font-size: 0.75rem; font-weight: 500; line-height: 1.2; white-space: nowrap; }
+  .pill-submitted { background: var(--color-info-bg); color: var(--color-info-text); }
+  .pill-in-progress { background: var(--color-warning-bg); color: var(--color-warning-text); }
+  .pill-action-needed { background: var(--color-magenta-bg); color: var(--color-magenta); }
+  .pill-action-needed::before { content: ""; width: 0.375rem; height: 0.375rem; border-radius: 9999px; background: var(--color-magenta); }
+  .pill-completed { background: var(--color-success-bg); color: var(--color-success-text); }
+  .pill-cancelled { background: var(--color-neutral-bg); color: var(--color-neutral-text); }
+
+  .entity-badge { display: inline-flex; align-items: center; padding: 0.125rem 0.375rem; border-radius: var(--radius-sm); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; line-height: 1.2; }
+  .entity-badge-rapid { background: var(--color-magenta-bg); color: var(--color-magenta); }
+  .entity-badge-rchbs { background: var(--color-navy-bg); color: var(--color-navy); }
+
+  .badge { display: inline-flex; align-items: center; padding: 0.125rem 0.5rem; border-radius: var(--radius-md); font-size: 0.7rem; font-weight: 600; line-height: 1.3; white-space: nowrap; }
+  .badge-expired { background: var(--color-danger-bg); color: var(--color-danger-text); }
+  .badge-urgent { background: var(--color-magenta-bg); color: var(--color-magenta); }
+  .badge-warning { background: var(--color-warning-bg); color: var(--color-warning-text); }
+  .badge-healthy { background: var(--color-success-bg); color: var(--color-success-text); }
+
+  .comp-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--color-bg-sunken); }
+  .comp-row:last-child { border-bottom: 0; }
+  .comp-row .lbl { width: 132px; flex: none; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-tertiary); }
+
+  /* ---------- Browser frame for the screen mockups ---------- */
+  .frame { border-radius: 14px; overflow: hidden; box-shadow: 0 20px 48px rgba(16,24,40,0.16), 0 0 0 1px var(--color-border); background: #fff; }
+  .frame-chrome { height: 40px; background: #e9edf3; display: flex; align-items: center; gap: 8px; padding: 0 14px; border-bottom: 1px solid var(--color-border); }
+  .frame-dot { width: 11px; height: 11px; border-radius: 9999px; }
+  .frame-url { margin-left: 12px; flex: 1; height: 24px; background: #fff; border-radius: 6px; display: flex; align-items: center; padding: 0 12px; font-size: 0.72rem; color: var(--color-text-secondary); font-family: var(--font-mono); }
+  .frame-body { background: var(--color-bg); }
+
+  /* ---------- App chrome reproduced ---------- */
+  .topbar { height: 58px; background: #fff; border-bottom: 1px solid var(--color-border); display: flex; align-items: center; gap: 16px; padding: 0 22px; }
+  .topbar .ham { color: var(--color-navy); display: flex; }
+  .topbar .page-title { font-size: 0.95rem; font-weight: 700; color: var(--color-navy); }
+  .topbar .spacer { flex: 1; }
+  .searchbox { width: 240px; height: 36px; background: var(--color-bg-sunken); border-radius: var(--radius-lg); display: flex; align-items: center; gap: 8px; padding: 0 12px; color: var(--color-text-tertiary); font-size: 0.8rem; }
+  .iconbtn { width: 34px; height: 34px; border-radius: var(--radius-lg); display: inline-flex; align-items: center; justify-content: center; color: var(--color-text-secondary); position: relative; }
+  .avatar { width: 32px; height: 32px; border-radius: 9999px; background: var(--color-magenta); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 700; }
+  .userchip { display: flex; align-items: center; gap: 9px; }
+  .userchip .nm { font-size: 0.78rem; font-weight: 600; color: var(--color-navy); line-height: 1.15; }
+  .userchip .rl { font-size: 0.68rem; color: var(--color-text-secondary); }
+
+  .content { padding: 22px 28px 32px; }
+  .eyebrow { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-secondary); }
+  .page-h1 { font-size: 1.6rem; font-weight: 800; color: var(--color-navy); margin-top: 4px; }
+  .page-sub { font-size: 0.82rem; color: var(--color-text-secondary); margin-top: 4px; }
+  .page-sub a { color: var(--color-magenta); }
+
+  .card { background: #fff; border-radius: var(--radius-2xl); box-shadow: var(--shadow-card); overflow: hidden; }
+
+  /* KPI cards */
+  .kpi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 18px; }
+  @media (max-width: 720px) { .kpi-grid { grid-template-columns: 1fr 1fr; } }
+  .kpi { background: #fff; border-radius: var(--radius-xl); box-shadow: var(--shadow-card); padding: 15px 17px; position: relative; }
+  .kpi .k-top { display: flex; justify-content: space-between; align-items: flex-start; }
+  .kpi .k-label { font-size: 0.64rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--color-text-secondary); }
+  .kpi .k-icon { color: var(--color-text-tertiary); }
+  .kpi .k-value { font-size: 1.5rem; font-weight: 800; color: var(--color-navy); margin-top: 10px; line-height: 1; }
+  .kpi .k-value.green { color: var(--color-success-text); }
+  .kpi .k-value.red { color: var(--color-danger-text); }
+  .kpi .k-sub { font-size: 0.66rem; color: var(--color-text-tertiary); margin-top: 7px; }
+
+  .panel { padding: 18px 20px; }
+  .panel-eyebrow { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em; color: var(--color-text-secondary); display: flex; align-items: center; gap: 7px; }
+  .mt14 { margin-top: 14px; } .mt16 { margin-top: 16px; } .mt20 { margin-top: 20px; }
+
+  /* sparkline strip */
+  .spark { display: flex; align-items: flex-end; gap: 3px; height: 34px; margin: 14px 0; }
+  .spark i { flex: 1; height: 3px; background: var(--color-border); border-radius: 2px; }
+  .spark-axis { display: flex; justify-content: space-between; font-size: 0.6rem; color: var(--color-text-tertiary); letter-spacing: 0.05em; }
+
+  .empty-mini { text-align: center; color: var(--color-text-secondary); font-size: 0.8rem; padding: 26px 0; }
+
+  /* aged AR bar */
+  .ar-value { font-size: 1.7rem; font-weight: 800; color: var(--color-navy); }
+  .ar-bar { display: flex; height: 12px; border-radius: 9999px; overflow: hidden; margin: 14px 0 14px; }
+  .ar-legend { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+  .ar-legend .col .lg-lbl { font-size: 0.58rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-secondary); display: flex; align-items: center; gap: 5px; }
+  .ar-legend .col .lg-val { font-size: 0.82rem; font-weight: 700; color: var(--color-navy); margin-top: 4px; }
+  .dot { width: 7px; height: 7px; border-radius: 9999px; flex: none; }
+
+  .off-row { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--color-bg-sunken); font-size: 0.8rem; }
+  .off-row:last-child { border-bottom: 0; }
+  .off-row .nm { font-weight: 600; color: var(--color-navy); }
+  .off-row .age { margin-left: auto; font-size: 0.66rem; color: var(--color-danger-text); font-weight: 600; }
+  .off-row .amt { width: 92px; text-align: right; font-weight: 700; color: var(--color-navy); }
+
+  .risk-row { display: flex; align-items: center; gap: 8px; padding: 9px 0; border-bottom: 1px solid var(--color-bg-sunken); font-size: 0.78rem; }
+  .risk-row:last-child { border-bottom: 0; }
+  .risk-row .desc { color: var(--color-navy); font-weight: 500; }
+  .risk-row .kind { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-text-tertiary); font-weight: 700; }
+  .risk-row .when { margin-left: auto; font-size: 0.68rem; font-weight: 600; }
+
+  /* clients table */
+  .toolbar { display: flex; align-items: center; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+  .toolbar .search-wide { flex: 1; min-width: 220px; height: 42px; background: var(--color-bg-sunken); border-radius: var(--radius-lg); display: flex; align-items: center; gap: 9px; padding: 0 14px; color: var(--color-text-tertiary); font-size: 0.82rem; }
+  .seg { display: inline-flex; background: var(--color-bg-sunken); border-radius: var(--radius-lg); padding: 3px; gap: 2px; }
+  .seg span { font-size: 0.74rem; font-weight: 600; color: var(--color-text-secondary); padding: 6px 12px; border-radius: 7px; }
+  .seg span.on { background: #fff; color: var(--color-navy); box-shadow: var(--shadow-card); }
+  .viewtoggle { display: inline-flex; gap: 2px; background: var(--color-bg-sunken); border-radius: var(--radius-lg); padding: 3px; }
+  .viewtoggle span { width: 32px; height: 30px; display: inline-flex; align-items: center; justify-content: center; border-radius: 6px; color: var(--color-text-tertiary); }
+  .viewtoggle span.on { background: #fff; color: var(--color-navy); box-shadow: var(--shadow-card); }
+
+  table.tbl { width: 100%; border-collapse: collapse; }
+  table.tbl th { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-text-secondary); text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--color-border); }
+  table.tbl th.r, table.tbl td.r { text-align: right; }
+  table.tbl th.c, table.tbl td.c { text-align: center; }
+  table.tbl td { padding: 13px 16px; border-bottom: 1px solid var(--color-bg-sunken); font-size: 0.82rem; vertical-align: middle; }
+  table.tbl tr:last-child td { border-bottom: 0; }
+  table.tbl tr.alt td { background: var(--color-bg-sunken); }
+  .co-cell { display: flex; align-items: center; gap: 11px; }
+  .co-ic { width: 34px; height: 34px; border-radius: var(--radius-lg); background: var(--color-bg-sunken); color: var(--color-text-tertiary); display: inline-flex; align-items: center; justify-content: center; flex: none; }
+  .co-name { font-weight: 700; color: var(--color-navy); font-size: 0.84rem; }
+  .co-meta { display: flex; align-items: center; gap: 7px; margin-top: 3px; }
+  .co-cr { font-size: 0.66rem; color: var(--color-text-tertiary); font-family: var(--font-mono); }
+  .contact-nm { font-weight: 600; color: var(--color-navy); }
+  .contact-ph { font-size: 0.72rem; color: var(--color-text-secondary); margin-top: 2px; }
+  .amt-out { font-weight: 700; color: var(--color-danger-text); }
+  .amt-zero { font-weight: 700; color: var(--color-success-text); }
+  .active-cell { display: inline-flex; align-items: center; gap: 6px; }
+  .count-dot { background: var(--color-magenta); color: #fff; font-size: 0.62rem; font-weight: 700; min-width: 16px; height: 16px; padding: 0 4px; border-radius: 9999px; display: inline-flex; align-items: center; justify-content: center; }
+  .table-cap { padding: 12px 16px; font-size: 0.7rem; color: var(--color-text-secondary); }
+
+  /* login */
+  .login-wrap { min-height: 540px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; }
+  .login-brand { text-align: center; margin-bottom: 26px; }
+  .login-brand .wm { font-size: 1.6rem; font-weight: 800; color: var(--color-navy); letter-spacing: -0.02em; }
+  .login-brand .tg { font-size: 0.64rem; font-weight: 600; letter-spacing: 0.26em; color: var(--color-magenta); text-transform: uppercase; margin-top: 4px; }
+  .login-card { width: 100%; max-width: 380px; background: #fff; border-radius: var(--radius-2xl); box-shadow: var(--shadow-card); padding: 26px 26px 28px; }
+  .login-card h3 { font-size: 1.05rem; font-weight: 800; }
+  .login-card .muted { font-size: 0.76rem; color: var(--color-text-secondary); margin-top: 3px; }
+  .fld { margin-top: 18px; }
+  .fld label { display: block; font-size: 0.74rem; font-weight: 600; color: var(--color-navy); margin-bottom: 6px; }
+  .fakeinput { height: 44px; border: 1px solid var(--color-border); border-radius: var(--radius-lg); display: flex; align-items: center; gap: 9px; padding: 0 13px; color: var(--color-text-tertiary); font-size: 0.84rem; background: #fff; }
+  .login-card .btn { width: 100%; margin-top: 22px; }
+
+  .footer { margin-top: 80px; text-align: center; font-size: 0.74rem; color: var(--color-text-tertiary); border-top: 1px solid var(--color-border); padding-top: 26px; }
+  .footer code { font-family: var(--font-mono); color: var(--color-text-secondary); }
+  .ar-sample { font-family: var(--font-arabic); }
+</style>
+</head>
+<body>
+
+<!-- ===================== HERO ===================== -->
+<header class="doc-hero">
+  <div class="inner">
+    <h1>RCH<span class="reg">©</span> ERP</h1>
+    <div class="tagline">Rapid Clearing House</div>
+    <p>The design system &amp; theme of the RCH CRM/ERP — brand tokens, components, and the key screens, captured as a single shareable page.</p>
+    <div class="meta">Static preview · Plus Jakarta Sans · Navy #13283f + Magenta #d6286b · Two entities: Rapid &amp; RCHBS</div>
+  </div>
+</header>
+
+<main class="doc">
+
+  <!-- ===================== COLOR ===================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-eyebrow">01 · Foundations</div>
+      <h2>Color</h2>
+      <p>Navy is the brand (structure, headings, ink). Magenta is action (CTAs, active states, key links) — used sparingly. Neutrals are cool, low-chroma and tinted toward navy, never pure gray. Semantic colors are muted jewel tones, not vitamin-label brights.</p>
+    </div>
+    <div class="swatch-grid">
+      <div class="swatch"><div class="chip" style="background:#13283f"></div><div class="info"><div class="name">Navy</div><div class="hex">#13283f</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#d6286b"></div><div class="info"><div class="name">Magenta</div><div class="hex">#d6286b</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#f2f4f8;box-shadow:inset 0 0 0 1px #dde2ec"></div><div class="info"><div class="name">Page BG</div><div class="hex">#f2f4f8</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#ffffff;box-shadow:inset 0 0 0 1px #dde2ec"></div><div class="info"><div class="name">Surface</div><div class="hex">#ffffff</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#dde2ec"></div><div class="info"><div class="name">Border</div><div class="hex">#dde2ec</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#2da84f"></div><div class="info"><div class="name">Success</div><div class="hex">#2da84f</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#d98e1a"></div><div class="info"><div class="name">Warning</div><div class="hex">#d98e1a</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#c24344"></div><div class="info"><div class="name">Danger</div><div class="hex">#c24344</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#2c5f94"></div><div class="info"><div class="name">Info</div><div class="hex">#2c5f94</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#5a6680"></div><div class="info"><div class="name">Text 2°</div><div class="hex">#5a6680</div></div></div>
+    </div>
+  </section>
+
+  <!-- ===================== TYPE ===================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-eyebrow">02 · Foundations</div>
+      <h2>Typography</h2>
+      <p>Plus Jakarta Sans across the product; IBM Plex Sans Arabic for RTL. Tight tracking on headings, generous on uppercase eyebrows.</p>
+    </div>
+    <div class="type-card">
+      <div class="type-row"><div class="lbl">Page title · 800</div><div style="font-size:1.6rem;font-weight:800;letter-spacing:-0.02em;color:var(--color-navy)">Management Dashboard</div></div>
+      <div class="type-row"><div class="lbl">Section · 700</div><div style="font-size:1.15rem;font-weight:700;color:var(--color-navy)">Collection &amp; aged receivables</div></div>
+      <div class="type-row"><div class="lbl">Body · 400</div><div style="font-size:0.9rem;color:var(--color-text-primary)">Daily pulse for Rapid &amp; RCHBS — lead indicators on the left, lag on the right.</div></div>
+      <div class="type-row"><div class="lbl">Eyebrow · 600</div><div style="font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.16em;color:var(--color-magenta)">My assigned roster</div></div>
+      <div class="type-row"><div class="lbl">Mono · IDs</div><div style="font-family:var(--font-mono);font-size:0.85rem;color:var(--color-text-secondary)">RCH-C0001 · RCHBS-C0004</div></div>
+      <div class="type-row"><div class="lbl">Arabic · RTL</div><div class="ar-sample" dir="rtl" style="font-size:1.05rem;color:var(--color-navy)">رابِد للتخليص — لوحة التحكم</div></div>
+    </div>
+  </section>
+
+  <!-- ===================== COMPONENTS ===================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-eyebrow">03 · Library</div>
+      <h2>Components</h2>
+      <p>The locked primitives the product is built from — every value pulled from <code>globals.css</code>.</p>
+    </div>
+    <div class="token-card">
+      <div class="comp-row">
+        <div class="lbl">Buttons</div>
+        <button class="btn btn-primary">+ Create</button>
+        <button class="btn btn-secondary">Export CSV</button>
+        <button class="btn btn-ghost">Cancel</button>
+        <button class="btn btn-primary btn-sm">Onboard client</button>
+      </div>
+      <div class="comp-row">
+        <div class="lbl">Status pills</div>
+        <span class="pill pill-submitted">Submitted</span>
+        <span class="pill pill-in-progress">In progress</span>
+        <span class="pill pill-action-needed">Action needed</span>
+        <span class="pill pill-completed">Completed</span>
+        <span class="pill pill-cancelled">Cancelled</span>
+      </div>
+      <div class="comp-row">
+        <div class="lbl">Entity badges</div>
+        <span class="entity-badge entity-badge-rapid">Rapid</span>
+        <span class="entity-badge entity-badge-rchbs">RCHBS</span>
+      </div>
+      <div class="comp-row">
+        <div class="lbl">Expiry badges</div>
+        <span class="badge badge-expired">Expired</span>
+        <span class="badge badge-urgent">Urgent</span>
+        <span class="badge badge-warning">Due soon</span>
+        <span class="badge badge-healthy">Healthy</span>
+      </div>
+      <div class="comp-row">
+        <div class="lbl">Inputs</div>
+        <div style="flex:1;min-width:220px"><div class="fakeinput">name@rch.qa</div></div>
+        <div style="width:160px"><div class="fakeinput">••••••••</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SCREEN 1 — LOGIN ===================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-eyebrow">04 · Screen</div>
+      <h2>Sign in</h2>
+      <p>The public entry point — staff-only. Restrained, centered, brand-forward.</p>
+    </div>
+    <div class="frame">
+      <div class="frame-chrome">
+        <span class="frame-dot" style="background:#ff5f57"></span>
+        <span class="frame-dot" style="background:#febc2e"></span>
+        <span class="frame-dot" style="background:#28c840"></span>
+        <span class="frame-url">localhost:5173/login</span>
+      </div>
+      <div class="frame-body">
+        <div class="login-wrap">
+          <div class="login-brand">
+            <div class="wm">RCH ERP</div>
+            <div class="tg">Rapid Clearing House</div>
+          </div>
+          <div class="login-card">
+            <h3>Sign in</h3>
+            <div class="muted">Staff access only.</div>
+            <div class="fld">
+              <label>Email</label>
+              <div class="fakeinput">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
+                name@rch.qa
+              </div>
+            </div>
+            <div class="fld">
+              <label>Password</label>
+              <div class="fakeinput">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                ••••••••
+              </div>
+            </div>
+            <button class="btn btn-primary">Sign in</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SCREEN 2 — DASHBOARD ===================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-eyebrow">05 · Screen</div>
+      <h2>Management dashboard</h2>
+      <p>The executive home — lead indicators left, lagging financials right, with collection and compliance risk surfaced for both entities.</p>
+    </div>
+    <div class="frame">
+      <div class="frame-chrome">
+        <span class="frame-dot" style="background:#ff5f57"></span>
+        <span class="frame-dot" style="background:#febc2e"></span>
+        <span class="frame-dot" style="background:#28c840"></span>
+        <span class="frame-url">localhost:5173/</span>
+      </div>
+      <div class="frame-body">
+        <!-- topbar -->
+        <div class="topbar">
+          <span class="ham"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></span>
+          <span class="page-title">Management Dashboard</span>
+          <span class="spacer"></span>
+          <div class="searchbox">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            Search
+          </div>
+          <button class="btn btn-primary btn-sm">+ Create</button>
+          <span class="iconbtn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></span>
+          <div class="userchip">
+            <span class="avatar">AN</span>
+            <div><div class="nm">Aurelian N</div><div class="rl">Super Admin</div></div>
+          </div>
+        </div>
+        <!-- content -->
+        <div class="content">
+          <div class="eyebrow">Management</div>
+          <div class="page-h1">Dashboard</div>
+          <div class="page-sub">Daily pulse for Rapid &amp; RCHBS — lead indicators on the left, lag on the right. <a href="#">View per-entity papers →</a></div>
+
+          <div class="kpi-grid">
+            <div class="kpi"><div class="k-top"><span class="k-label">Services · 30D</span><span class="k-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m7 14 3-3 3 3 5-6"/></svg></span></div><div class="k-value">0</div><div class="k-sub">6 open</div></div>
+            <div class="kpi"><div class="k-top"><span class="k-label">Open Backlog</span><span class="k-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></span></div><div class="k-value">6</div><div class="k-sub">awaiting invoice</div></div>
+            <div class="kpi"><div class="k-top"><span class="k-label">Revenue · MTD</span><span class="k-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17l6-6 4 4 8-8"/><path d="M17 7h4v4"/></svg></span></div><div class="k-value">QAR 0</div><div class="k-sub">service-priced</div></div>
+            <div class="kpi"><div class="k-top"><span class="k-label">Cash In · MTD</span><span class="k-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><circle cx="12" cy="12" r="3"/></svg></span></div><div class="k-value green">QAR 0</div><div class="k-sub">&nbsp;</div></div>
+            <div class="kpi"><div class="k-top"><span class="k-label">Overdue AR</span><span class="k-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 7-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/></svg></span></div><div class="k-value red">QAR 54,500</div><div class="k-sub">91d DSO · 5 of 5 overdue</div></div>
+            <div class="kpi"><div class="k-top"><span class="k-label">Compliance Risk</span><span class="k-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 4 5v6c0 5 3.5 8 8 11 4.5-3 8-6 8-11V5z"/></svg></span></div><div class="k-value">6</div><div class="k-sub">expired or missing</div></div>
+          </div>
+
+          <div class="card mt16">
+            <div class="panel">
+              <div class="panel-eyebrow">Service activity · last 30 days</div>
+              <div style="font-size:0.78rem;color:var(--color-text-secondary);margin-top:6px">0 services logged across both entities</div>
+              <div class="spark">
+                <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+              </div>
+              <div class="spark-axis"><span>30 DAYS AGO</span><span>TODAY</span></div>
+            </div>
+          </div>
+
+          <div class="two-col mt16">
+            <div class="card"><div class="panel">
+              <div style="display:flex;justify-content:space-between;align-items:center"><div class="panel-eyebrow">Top clients · 30D</div><a href="#" style="font-size:0.72rem">View all</a></div>
+              <div class="empty-mini">No service activity in the last 30 days.</div>
+            </div></div>
+            <div class="card"><div class="panel">
+              <div style="display:flex;justify-content:space-between;align-items:center"><div class="panel-eyebrow">Top PROs · 30D</div><a href="#" style="font-size:0.72rem">View staff</a></div>
+              <div class="empty-mini">No service completions in the last 30 days.</div>
+            </div></div>
+          </div>
+
+          <div class="card mt16"><div class="panel">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div class="panel-eyebrow"><span class="dot" style="background:var(--color-magenta)"></span> Collection</div>
+              <a href="#" style="font-size:0.72rem">Open aging dashboard →</a>
+            </div>
+            <div style="margin-top:12px"><div class="eyebrow" style="color:var(--color-text-tertiary)">Aged AR</div><div class="ar-value">QAR 54,500</div></div>
+            <div class="ar-bar">
+              <span style="width:7.7%;background:#2c5f94"></span>
+              <span style="width:26%;background:#d98e1a"></span>
+              <span style="width:26.1%;background:#c98a1a"></span>
+              <span style="width:22.6%;background:#b85a2a"></span>
+              <span style="width:17.6%;background:#c24344"></span>
+            </div>
+            <div class="ar-legend">
+              <div class="col"><div class="lg-lbl"><span class="dot" style="background:#2c5f94"></span>Current</div><div class="lg-val">QAR 0</div></div>
+              <div class="col"><div class="lg-lbl"><span class="dot" style="background:#d98e1a"></span>0–30 days</div><div class="lg-val">QAR 4,200</div></div>
+              <div class="col"><div class="lg-lbl"><span class="dot" style="background:#c98a1a"></span>31–60 days</div><div class="lg-val">QAR 14,200</div></div>
+              <div class="col"><div class="lg-lbl"><span class="dot" style="background:#b85a2a"></span>61–90 days</div><div class="lg-val">QAR 26,500</div></div>
+              <div class="col"><div class="lg-lbl"><span class="dot" style="background:#c24344"></span>90+ days</div><div class="lg-val">QAR 9,600</div></div>
+            </div>
+
+            <div style="margin-top:20px;display:flex;justify-content:space-between;align-items:center">
+              <div class="panel-eyebrow">Worst offenders</div><span style="font-size:0.66rem;color:var(--color-text-tertiary)">Avg DSO · 91d</span>
+            </div>
+            <div class="mt14">
+              <div class="off-row"><span class="entity-badge entity-badge-rchbs">RCHBS</span><span class="nm">Lusail Hospitality</span><span class="age">68d old</span><span class="amt">QAR 14,200</span></div>
+              <div class="off-row"><span class="entity-badge entity-badge-rchbs">RCHBS</span><span class="nm">DLH</span><span class="age">104d old</span><span class="amt">QAR 14,000</span></div>
+              <div class="off-row"><span class="entity-badge entity-badge-rapid">Rapid</span><span class="nm">Gulf Pearl</span><span class="age">92d old</span><span class="amt">QAR 12,500</span></div>
+              <div class="off-row"><span class="entity-badge entity-badge-rapid">Rapid</span><span class="nm">Al Noor</span><span class="age">150d old</span><span class="amt">QAR 9,600</span></div>
+              <div class="off-row"><span class="entity-badge entity-badge-rchbs">RCHBS</span><span class="nm">NDS</span><span class="age">42d old</span><span class="amt">QAR 4,200</span></div>
+            </div>
+          </div></div>
+
+          <div class="card mt16"><div class="panel">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div class="panel-eyebrow"><span class="dot" style="background:var(--color-danger)"></span> Risk register</div>
+              <span style="font-size:0.66rem;color:var(--color-text-tertiary)">3 expired · 1 expiring 30d</span>
+            </div>
+            <div class="mt14">
+              <div class="risk-row"><span class="badge badge-expired">Expired</span><span class="entity-badge entity-badge-rapid">Rapid</span><span class="desc">establishment_card</span><span class="kind">Entity paper</span><span class="when" style="color:var(--color-danger-text)">Expired 51d ago</span></div>
+              <div class="risk-row"><span class="badge badge-expired">Expired</span><span class="entity-badge entity-badge-rapid">Rapid</span><span class="desc">Gulf Pearl — cc</span><span class="kind">Client doc</span><span class="when" style="color:var(--color-danger-text)">Expired 42d ago</span></div>
+              <div class="risk-row"><span class="badge badge-expired">Expired</span><span class="entity-badge entity-badge-rapid">Rapid</span><span class="desc">Al Noor — cr</span><span class="kind">Client doc</span><span class="when" style="color:var(--color-danger-text)">Expired 21d ago</span></div>
+              <div class="risk-row"><span class="badge badge-expired">Expired</span><span class="entity-badge entity-badge-rapid">Rapid</span><span class="desc">cr</span><span class="kind">Entity paper</span><span class="when" style="color:var(--color-danger-text)">Expired 11d ago</span></div>
+              <div class="risk-row"><span class="badge badge-expired">Expired</span><span class="entity-badge entity-badge-rchbs">RCHBS</span><span class="desc">Lusail Hospitality — ml</span><span class="kind">Client doc</span><span class="when" style="color:var(--color-danger-text)">Expired 8d ago</span></div>
+              <div class="risk-row"><span class="badge badge-warning">Expiring</span><span class="entity-badge entity-badge-rapid">Rapid</span><span class="desc">ml</span><span class="kind">Entity paper</span><span class="when" style="color:var(--color-warning-text)">24d left</span></div>
+            </div>
+          </div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SCREEN 3 — CLIENTS ===================== -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-eyebrow">06 · Screen</div>
+      <h2>Clients</h2>
+      <p>The assigned roster — entity-tagged, outstanding balance, active services, and renewal health at a glance.</p>
+    </div>
+    <div class="frame">
+      <div class="frame-chrome">
+        <span class="frame-dot" style="background:#ff5f57"></span>
+        <span class="frame-dot" style="background:#febc2e"></span>
+        <span class="frame-dot" style="background:#28c840"></span>
+        <span class="frame-url">localhost:5173/clients</span>
+      </div>
+      <div class="frame-body">
+        <div class="topbar">
+          <span class="ham"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></span>
+          <span class="page-title">Clients</span>
+          <span class="spacer"></span>
+          <div class="searchbox">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            Search
+          </div>
+          <button class="btn btn-primary btn-sm">+ Create</button>
+          <span class="iconbtn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></span>
+          <div class="userchip">
+            <span class="avatar">AN</span>
+            <div><div class="nm">Aurelian N</div><div class="rl">Super Admin</div></div>
+          </div>
+        </div>
+        <div class="content">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap">
+            <div>
+              <div class="eyebrow">My assigned roster</div>
+              <div class="page-h1">Clients</div>
+              <div class="page-sub">6 clients · QAR 54,500 outstanding · 5 with balance</div>
+            </div>
+            <div style="display:flex;gap:10px">
+              <button class="btn btn-secondary btn-sm"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg> Export CSV</button>
+              <button class="btn btn-primary btn-sm">+ Onboard client</button>
+            </div>
+          </div>
+
+          <div class="toolbar">
+            <div class="search-wide">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              Search by name, contact, CR…
+            </div>
+            <div class="seg"><span class="on">All</span><span>Rapid</span><span>RCHBS</span></div>
+            <div class="seg"><span class="on">All types</span><span>Retainer</span><span>Per-job</span></div>
+            <div class="viewtoggle">
+              <span class="on"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></span>
+              <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></span>
+            </div>
+          </div>
+
+          <div class="card mt16">
+            <table class="tbl">
+              <thead><tr>
+                <th>Company</th><th>Type</th><th>Contact</th><th class="r">Outstanding</th><th class="c">Active</th><th class="c">Renewals</th><th></th>
+              </tr></thead>
+              <tbody>
+                <tr>
+                  <td><div class="co-cell"><span class="co-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4M9 6h.01M15 6h.01M9 10h.01M15 10h.01M9 14h.01M15 14h.01"/></svg></span><div><div class="co-name">Al Noor</div><div class="co-meta"><span class="entity-badge entity-badge-rapid">Rapid</span><span class="co-cr">RCH-C0003</span></div></div></div></td>
+                  <td>Per-job</td>
+                  <td><div class="contact-nm">Maha Darwish</div><div class="contact-ph">+974 4490 7710</div></td>
+                  <td class="r"><span class="amt-out">QAR 9,600</span></td>
+                  <td class="c"><span class="active-cell">1 <span class="count-dot">1</span></span></td>
+                  <td class="c"><span class="badge badge-warning">Due soon</span></td>
+                  <td class="r" style="color:var(--color-text-tertiary)">›</td>
+                </tr>
+                <tr class="alt">
+                  <td><div class="co-cell"><span class="co-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4M9 6h.01M15 6h.01M9 10h.01M15 10h.01M9 14h.01M15 14h.01"/></svg></span><div><div class="co-name">DLH</div><div class="co-meta"><span class="entity-badge entity-badge-rchbs">RCHBS</span><span class="co-cr">RCHBS-C0004</span></div></div></div></td>
+                  <td>Retainer</td>
+                  <td><div class="contact-nm">Rania Haddad</div><div class="contact-ph">+974 4422 3390</div></td>
+                  <td class="r"><span class="amt-out">QAR 14,000</span></td>
+                  <td class="c">1</td>
+                  <td class="c"><span class="badge badge-healthy">Healthy</span></td>
+                  <td class="r" style="color:var(--color-text-tertiary)">›</td>
+                </tr>
+                <tr>
+                  <td><div class="co-cell"><span class="co-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4M9 6h.01M15 6h.01M9 10h.01M15 10h.01M9 14h.01M15 14h.01"/></svg></span><div><div class="co-name">Gulf Pearl</div><div class="co-meta"><span class="entity-badge entity-badge-rapid">Rapid</span><span class="co-cr">RCH-C0001</span></div></div></div></td>
+                  <td>Retainer</td>
+                  <td><div class="contact-nm">Khalid Al-Thani</div><div class="contact-ph">+974 4412 8801</div></td>
+                  <td class="r"><span class="amt-out">QAR 12,500</span></td>
+                  <td class="c"><span class="active-cell">2 <span class="count-dot">1</span></span></td>
+                  <td class="c"><span class="badge badge-warning">Due soon</span></td>
+                  <td class="r" style="color:var(--color-text-tertiary)">›</td>
+                </tr>
+                <tr class="alt">
+                  <td><div class="co-cell"><span class="co-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4M9 6h.01M15 6h.01M9 10h.01M15 10h.01M9 14h.01M15 14h.01"/></svg></span><div><div class="co-name" style="color:var(--color-magenta);text-decoration:underline">Lusail Hospitality</div><div class="co-meta"><span class="entity-badge entity-badge-rchbs">RCHBS</span><span class="co-cr">RCHBS-C0006</span></div></div></div></td>
+                  <td>Retainer</td>
+                  <td><div class="contact-nm">Sara Mansour</div><div class="contact-ph">+974 4455 2281</div></td>
+                  <td class="r"><span class="amt-out">QAR 14,200</span></td>
+                  <td class="c">1</td>
+                  <td class="c"><span class="badge badge-warning">Due soon</span></td>
+                  <td class="r" style="color:var(--color-text-tertiary)">›</td>
+                </tr>
+                <tr>
+                  <td><div class="co-cell"><span class="co-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4M9 6h.01M15 6h.01M9 10h.01M15 10h.01M9 14h.01M15 14h.01"/></svg></span><div><div class="co-name">MIS</div><div class="co-meta"><span class="entity-badge entity-badge-rapid">Rapid</span><span class="co-cr">RCH-C0005</span></div></div></div></td>
+                  <td>Per-job</td>
+                  <td><div class="contact-nm">Yousef Nasser</div><div class="contact-ph">+974 4408 5900</div></td>
+                  <td class="r"><span class="amt-zero">QAR 0</span></td>
+                  <td class="c">1</td>
+                  <td class="c"><span class="badge badge-healthy">Healthy</span></td>
+                  <td class="r" style="color:var(--color-text-tertiary)">›</td>
+                </tr>
+                <tr class="alt">
+                  <td><div class="co-cell"><span class="co-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4M9 6h.01M15 6h.01M9 10h.01M15 10h.01M9 14h.01M15 14h.01"/></svg></span><div><div class="co-name">NDS</div><div class="co-meta"><span class="entity-badge entity-badge-rchbs">RCHBS</span><span class="co-cr">RCHBS-C0002</span></div></div></div></td>
+                  <td>Per-job</td>
+                  <td><div class="contact-nm">Omar Bin Saeed</div><div class="contact-ph">+974 4477 0112</div></td>
+                  <td class="r"><span class="amt-out">QAR 4,200</span></td>
+                  <td class="c">1</td>
+                  <td class="c"><span class="badge badge-warning">Due soon</span></td>
+                  <td class="r" style="color:var(--color-text-tertiary)">›</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="table-cap">1–6 of 6</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer">
+    <p>RCH ERP — design &amp; theme preview. Tokens sourced verbatim from <code>app/frontend/src/styles/globals.css</code>.<br/>
+    Static reproduction of the live app at <code>localhost:5173</code> — no backend required to view this file.</p>
+  </div>
+
+</main>
+</body>
+</html>

@@ -28,6 +28,8 @@ export const en = {
     closeMenu: 'Close menu',
     playShowreel: 'Play showreel',
     fullscreen: 'Fullscreen',
+    openLive: 'Open the live site ↗',
+    email: 'Email me',
   },
   sections: {
     whatIDo: 'what i do',
@@ -64,6 +66,8 @@ export const en = {
     build: 'build',
     ai: 'ai in the workflow',
     outcome: 'outcome & what’s next',
+    confidential: 'Confidential',
+    context: 'context',
   },
   misc: {
     placeholder: 'Asset coming soon',

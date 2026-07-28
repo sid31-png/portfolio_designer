@@ -26,6 +26,8 @@ export const ar: Dictionary = {
     closeMenu: 'أغلق القائمة',
     playShowreel: 'شغّل العرض',
     fullscreen: 'ملء الشاشة',
+    openLive: 'افتح الموقع المباشر ↗',
+    email: 'راسلني',
   },
   sections: {
     whatIDo: 'ما أقوم به',
@@ -62,6 +64,8 @@ export const ar: Dictionary = {
     build: 'البناء',
     ai: 'الذكاء الاصطناعي في سير العمل',
     outcome: 'النتيجة والخطوة التالية',
+    confidential: 'سرّي',
+    context: 'السياق',
   },
   misc: {
     placeholder: 'المحتوى قريبًا',

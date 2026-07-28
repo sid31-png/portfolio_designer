@@ -26,6 +26,8 @@ export const fr: Dictionary = {
     closeMenu: 'Fermer le menu',
     playShowreel: 'Lire le showreel',
     fullscreen: 'Plein écran',
+    openLive: 'Ouvrir le site en ligne ↗',
+    email: 'Écrivez-moi',
   },
   sections: {
     whatIDo: 'ce que je fais',
@@ -62,6 +64,8 @@ export const fr: Dictionary = {
     build: 'développement',
     ai: 'l’ia dans le processus',
     outcome: 'résultat & prochaines étapes',
+    confidential: 'Confidentiel',
+    context: 'contexte',
   },
   misc: {
     placeholder: 'Contenu à venir',

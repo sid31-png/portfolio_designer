@@ -66,3 +66,14 @@ export function useI18n() {
   if (!ctx) throw new Error('useI18n must be used within I18nProvider');
   return ctx;
 }
+
+/**
+ * Returns a picker for inline Localized content ({ en, fr, ar }) bound to the
+ * active language, so components can write L(project.title) instead of
+ * project.title[lang].
+ */
+// eslint-disable-next-line react-refresh/only-export-components
+export function useLoc() {
+  const { lang } = useI18n();
+  return (value: { en: string; fr: string; ar: string }) => value[lang];
+}
