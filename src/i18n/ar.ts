@@ -1,0 +1,72 @@
+import type { Dictionary } from './en';
+
+// UI chrome translated to Arabic (native voice). Long-form case-study prose is
+// handled separately and flagged for Ahmed's review — see README.
+export const ar: Dictionary = {
+  meta: {
+    langName: 'العربية',
+    short: 'ع',
+  },
+  nav: {
+    home: 'الرئيسية',
+    work: 'الأعمال',
+    about: 'نبذة',
+    resume: 'السيرة',
+    contact: 'تواصل',
+    skipToContent: 'تخطَّ إلى المحتوى',
+  },
+  actions: {
+    seeWork: 'شاهد أعمالي',
+    downloadCv: 'حمّل السيرة الذاتية',
+    viewCaseStudy: 'اطّلع على الحالة',
+    backToWork: 'العودة إلى الأعمال',
+    toggleTheme: 'تبديل الوضع الفاتح / الداكن',
+    toggleMotion: 'تشغيل / إيقاف الحركة',
+    openMenu: 'افتح القائمة',
+    closeMenu: 'أغلق القائمة',
+    playShowreel: 'شغّل العرض',
+    fullscreen: 'ملء الشاشة',
+  },
+  sections: {
+    whatIDo: 'ما أقوم به',
+    impact: 'الأثر',
+    featuredWork: 'أعمال مختارة',
+    showreel: 'العرض',
+    about: 'نبذة',
+    howIWork: 'كيف أعمل',
+    skills: 'المهارات',
+    languages: 'اللغات',
+    now: 'حاليًا',
+    experience: 'الخبرة',
+    education: 'التعليم',
+    contact: 'تواصل',
+  },
+  contact: {
+    lead: 'لنتحدّث',
+    email: 'البريد',
+    whatsapp: 'واتساب',
+    linkedin: 'لينكدإن',
+    instagram: 'إنستغرام',
+    x: 'إكس',
+  },
+  caseStudy: {
+    role: 'الدور',
+    scope: 'النطاق',
+    tools: 'الأدوات',
+    year: 'السنة',
+    problem: 'المشكلة',
+    research: 'البحث والاستكشاف',
+    flows: 'المسارات وهيكلة المعلومات',
+    wireframes: 'من التخطيط إلى التصميم النهائي',
+    solution: 'الحل',
+    build: 'البناء',
+    ai: 'الذكاء الاصطناعي في سير العمل',
+    outcome: 'النتيجة والخطوة التالية',
+  },
+  misc: {
+    placeholder: 'المحتوى قريبًا',
+    notFound: 'هذه الصفحة غير موجودة.',
+    goHome: 'الصفحة الرئيسية',
+    figmaNote: 'ملف فيغما مباشر',
+  },
+};

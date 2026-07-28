@@ -1,0 +1,72 @@
+import type { Dictionary } from './en';
+
+// UI chrome translated to French. Long-form case-study prose is handled
+// separately and flagged for Ahmed's review — see README.
+export const fr: Dictionary = {
+  meta: {
+    langName: 'Français',
+    short: 'FR',
+  },
+  nav: {
+    home: 'Accueil',
+    work: 'Projets',
+    about: 'À propos',
+    resume: 'CV',
+    contact: 'Contact',
+    skipToContent: 'Aller au contenu',
+  },
+  actions: {
+    seeWork: 'Voir mes projets',
+    downloadCv: 'Télécharger le CV',
+    viewCaseStudy: 'Voir l’étude de cas',
+    backToWork: 'Retour aux projets',
+    toggleTheme: 'Basculer clair / sombre',
+    toggleMotion: 'Activer / couper l’animation',
+    openMenu: 'Ouvrir le menu',
+    closeMenu: 'Fermer le menu',
+    playShowreel: 'Lire le showreel',
+    fullscreen: 'Plein écran',
+  },
+  sections: {
+    whatIDo: 'ce que je fais',
+    impact: 'impact',
+    featuredWork: 'projets choisis',
+    showreel: 'showreel',
+    about: 'à propos',
+    howIWork: 'ma façon de travailler',
+    skills: 'compétences',
+    languages: 'langues',
+    now: 'en ce moment',
+    experience: 'expérience',
+    education: 'formation',
+    contact: 'contact',
+  },
+  contact: {
+    lead: 'Parlons-en',
+    email: 'E-mail',
+    whatsapp: 'WhatsApp',
+    linkedin: 'LinkedIn',
+    instagram: 'Instagram',
+    x: 'X',
+  },
+  caseStudy: {
+    role: 'Rôle',
+    scope: 'Périmètre',
+    tools: 'Outils',
+    year: 'Année',
+    problem: 'le problème',
+    research: 'recherche & découverte',
+    flows: 'parcours & architecture de l’information',
+    wireframes: 'du wireframe au haute-fidélité',
+    solution: 'la solution',
+    build: 'développement',
+    ai: 'l’ia dans le processus',
+    outcome: 'résultat & prochaines étapes',
+  },
+  misc: {
+    placeholder: 'Contenu à venir',
+    notFound: 'Cette page s’est égarée.',
+    goHome: 'Accueil',
+    figmaNote: 'Fichier Figma en direct',
+  },
+};

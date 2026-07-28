@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/portfolio_designer/favicon.svg" />
+
+    <title>Ahmed Bouamama — Product Designer · UI/UX & Front-End</title>
+    <meta
+      name="description"
+      content="I turn marketing and operations problems into real digital products — from UI/UX and front-end builds to the internal software that runs the business. Doha, Qatar."
+    />
+    <meta name="author" content="Ahmed Bouamama" />
+    <meta name="theme-color" content="#fbfbfd" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0a0a0b" media="(prefers-color-scheme: dark)" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Ahmed Bouamama — Product Designer · UI/UX & Front-End" />
+    <meta
+      property="og:description"
+      content="Product Designer in Doha. I design and ship products end-to-end, grounded in human-centred design (ISO 9241-210)."
+    />
+    <!-- OG image = headshot. Update the absolute URL below to your live domain. -->
+    <meta property="og:image" content="https://sid31-png.github.io/portfolio_designer/assets/ahmed-headshot.jpg" />
+    <meta property="og:url" content="https://sid31-png.github.io/portfolio_designer/" />
+
+    <!-- Twitter / X card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Ahmed Bouamama — Product Designer · UI/UX & Front-End" />
+    <meta
+      name="twitter:description"
+      content="Product Designer in Doha. I design and ship products end-to-end, grounded in human-centred design (ISO 9241-210)."
+    />
+    <meta name="twitter:image" content="https://sid31-png.github.io/portfolio_designer/assets/ahmed-headshot.jpg" />
+
+    <!--
+      Second half of the GitHub Pages SPA redirect (see public/404.html):
+      decode the ?/ path the 404 page encoded and restore a clean URL before
+      React Router mounts, so deep links + refresh work on a static host.
+    -->
+    <script>
+      (function () {
+        var l = window.location;
+        if (l.search[1] === '/') {
+          var decoded = l.search
+            .slice(1)
+            .split('&')
+            .map(function (s) {
+              return s.replace(/~and~/g, '&');
+            })
+            .join('?');
+          window.history.replaceState(null, '', l.pathname.slice(0, -1) + decoded + l.hash);
+        }
+      })();
+    </script>
+
+    <!--
+      No-flash theme init: runs before first paint so the correct light/dark
+      theme is applied immediately (reads saved choice, falls back to OS pref).
+      Kept inline + tiny on purpose.
+    -->
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('theme');
+          var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var dark = saved ? saved === 'dark' : prefersDark;
+          document.documentElement.classList.toggle('dark', dark);
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
