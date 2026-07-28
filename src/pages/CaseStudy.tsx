@@ -6,6 +6,7 @@ import { Reveal } from '@/components/Reveal';
 import { StatCounter } from '@/components/StatCounter';
 import { Showreel } from '@/components/Showreel';
 import { FigmaEmbed } from '@/components/FigmaEmbed';
+import { HtmlEmbed } from '@/components/HtmlEmbed';
 import { BeforeAfter } from '@/components/BeforeAfter';
 import { Gallery } from '@/components/Gallery';
 import { SEO } from '@/components/SEO';
@@ -55,6 +56,9 @@ function BlockView({ block }: { block: Block }) {
 
     case 'figma':
       return <FigmaEmbed embedUrl={block.embedUrl} title={L(block.title)} />;
+
+    case 'htmlEmbed':
+      return <HtmlEmbed src={block.src} title={L(block.title)} url={block.url} />;
 
     case 'beforeAfter':
       return (

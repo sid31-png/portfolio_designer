@@ -100,13 +100,10 @@ export const rchCrm: Project = {
           },
         },
         {
-          type: 'image',
-          wide: true,
-          image: {
-            src: 'assets/rch-crm-preview.jpg',
-            alt: { en: 'RCH CRM / ERP dashboard preview', fr: 'Aperçu du dashboard RCH CRM / ERP', ar: 'معاينة لوحة تحكم RCH CRM / ERP' },
-            caption: { en: 'Sanitized dashboard preview — the live design-system page opens from the button below.', fr: 'Aperçu de dashboard anonymisé, la page design-system en direct s\'ouvre via le bouton ci-dessous.', ar: 'معاينة لوحة تحكم مُنقّاة — تُفتح صفحة نظام التصميم المباشرة من الزر أدناه.' },
-          },
+          type: 'htmlEmbed',
+          src: 'projects/rch-crm.html',
+          url: 'rch-erp — design preview',
+          title: { en: 'RCH ERP — design system & screens', fr: 'RCH ERP — design system & écrans', ar: 'RCH ERP — نظام التصميم والشاشات' },
         },
       ],
     },

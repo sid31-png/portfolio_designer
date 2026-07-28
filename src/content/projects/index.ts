@@ -34,6 +34,9 @@ export type Block =
   | { type: 'video'; src: string; caption?: Localized }
   | { type: 'gallery'; images: ImageRef[] }
   | { type: 'figma'; embedUrl: string; title: Localized }
+  // A live embed of an internal HTML demo (the real project page), shown in a
+  // browser-chrome frame with its own scroll.
+  | { type: 'htmlEmbed'; src: string; title: Localized; url?: string }
   | { type: 'quote'; body: Localized }
   | { type: 'steps'; items: { n: string; title: Localized; body: Localized }[] }
   | { type: 'metrics'; items: { value: number; suffix: string; label: Localized }[] }

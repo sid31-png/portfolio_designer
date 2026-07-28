@@ -137,6 +137,12 @@ export const rchSaudi: Project = {
             ar: 'بُني بـ React وTailwind · ثنائي اللغة EN / AR',
           },
         },
+        {
+          type: 'htmlEmbed',
+          src: 'projects/rch-saudi.html',
+          url: 'rch — more than offices',
+          title: { en: 'RCH Saudi — live redesign', fr: 'RCH Saudi — refonte en ligne', ar: 'RCH السعودية — إعادة التصميم المباشرة' },
+        },
       ],
     },
     {
