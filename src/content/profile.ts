@@ -74,7 +74,7 @@ export const profile = {
     } as Localized,
   },
 
-  headshot: 'assets/ahmed-headshot.jpg',
+  headshot: 'assets/ahmed-portrait.jpg',
   showreel: 'assets/showreel.mp4',
   cv: 'cv/ahmed-bouamama-cv.pdf',
 

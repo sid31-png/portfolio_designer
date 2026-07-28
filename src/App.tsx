@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import { AnimatedBackground } from '@/components/AnimatedBackground';
+import { CustomCursor } from '@/components/CustomCursor';
 import { TabNav } from '@/components/nav/TabNav';
 import { Footer } from '@/components/Footer';
 import { ScrollToTop } from '@/components/ScrollToTop';
@@ -15,6 +16,7 @@ export default function App() {
   return (
     <>
       <AnimatedBackground />
+      <CustomCursor />
       <ScrollToTop />
       <TabNav />
       <main id="main" className="min-h-[70vh]">

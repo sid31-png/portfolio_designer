@@ -22,7 +22,7 @@
       content="Product Designer in Doha. I design and ship products end-to-end, grounded in human-centred design (ISO 9241-210)."
     />
     <!-- OG image = headshot. Update the absolute URL below to your live domain. -->
-    <meta property="og:image" content="https://sid31-png.github.io/portfolio_designer/assets/ahmed-headshot.jpg" />
+    <meta property="og:image" content="https://sid31-png.github.io/portfolio_designer/assets/ahmed-portrait.jpg" />
     <meta property="og:url" content="https://sid31-png.github.io/portfolio_designer/" />
 
     <!-- Twitter / X card -->
@@ -32,7 +32,7 @@
       name="twitter:description"
       content="Product Designer in Doha. I design and ship products end-to-end, grounded in human-centred design (ISO 9241-210)."
     />
-    <meta name="twitter:image" content="https://sid31-png.github.io/portfolio_designer/assets/ahmed-headshot.jpg" />
+    <meta name="twitter:image" content="https://sid31-png.github.io/portfolio_designer/assets/ahmed-portrait.jpg" />
 
     <!--
       Second half of the GitHub Pages SPA redirect (see public/404.html):
@@ -64,10 +64,12 @@
       (function () {
         try {
           var saved = localStorage.getItem('theme');
-          var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-          var dark = saved ? saved === 'dark' : prefersDark;
+          // Dark-first (Magnetto): default to dark unless the user chose light.
+          var dark = saved ? saved === 'dark' : true;
           document.documentElement.classList.toggle('dark', dark);
-        } catch (e) {}
+        } catch (e) {
+          document.documentElement.classList.add('dark');
+        }
       })();
     </script>
   </head>
