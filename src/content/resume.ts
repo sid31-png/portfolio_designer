@@ -15,23 +15,23 @@ export interface Role {
 
 export const experience: Role[] = [
   {
-    date: { en: 'Since May 2025', fr: 'Depuis mai 2025', ar: 'منذ مايو 2025' },
+    date: { en: 'May 2025 — Present', fr: 'Mai 2025 — Aujourd’hui', ar: 'مايو 2025 — حتى الآن' },
     title: { en: 'Product Designer & Front-End Developer', fr: 'Product Designer & Développeur Front-End', ar: 'مصمّم منتج ومطوّر واجهات أمامية' },
     org: 'RCH Business Solutions · Qatar',
     body: {
-      en: "Designed & built RCH's internal CRM/ERP and the Saudi corporate website — design system, dashboards and front-end. Led marketing & digital; the tools I shipped cut processing time 20% across 500+ mandates.",
-      fr: "J'ai conçu & développé le CRM/ERP interne de RCH et le site corporate Saudi, design system, dashboards et front-end. J'ai piloté le marketing & digital ; les outils livrés ont réduit le temps de traitement de 20% sur 500+ mandats.",
-      ar: 'صمّمت وطوّرت نظام CRM/ERP الداخلي لـ RCH والموقع المؤسسي السعودي، نظام تصميم ولوحات تحكم وواجهة أمامية. قُدْت التسويق والرقمي؛ والأدوات التي أطلقتها خفضت زمن المعالجة 20% عبر +500 معاملة.',
+      en: "Designed and built RCH's internal system from scratch by mapping workflows for the operations, PRO and collections teams. Streamlined dashboards to cut government processing time 20% across 500+ client mandates, and independently designed and developed the RCH Saudi corporate website in React and Tailwind. Partnered directly with leadership and government-facing staff to ground designs in real user workflows, using AI tools (Claude, Cursor, Higgsfield) to accelerate prototyping and development.",
+      fr: "J'ai conçu et développé le système interne de RCH de zéro, en cartographiant les workflows des équipes opérations, PRO et recouvrement. Des dashboards épurés ont réduit le temps de traitement gouvernemental de 20% sur 500+ mandats clients, et j'ai conçu et développé seul le site corporate RCH Saudi en React et Tailwind. J'ai travaillé directement avec la direction et le personnel en contact avec l'administration pour ancrer les designs dans de vrais workflows, en utilisant des outils d'IA (Claude, Cursor, Higgsfield) pour accélérer le prototypage et le développement.",
+      ar: 'صمّمت وطوّرت نظام RCH الداخلي من الصفر عبر رسم مسارات عمل فرق العمليات والعلاقات الحكومية والتحصيل. لوحات تحكم مبسّطة خفّضت زمن المعالجة الحكومية 20% عبر +500 معاملة عميل، وصمّمت وطوّرت منفرداً الموقع المؤسسي RCH السعودية بـ React وTailwind. عملت مباشرةً مع القيادة والموظفين المتعاملين مع الجهات الحكومية لترسيخ التصاميم في مسارات عمل حقيقية، مستخدماً أدوات الذكاء الاصطناعي (Claude، Cursor، Higgsfield) لتسريع النمذجة والتطوير.',
     },
   },
   {
-    date: { en: 'Nov 2024 — May 2025', fr: 'Nov. 2024 à mai 2025', ar: 'نوفمبر 2024 إلى مايو 2025' },
-    title: { en: 'Digital Marketing & Client Solutions', fr: 'Marketing Digital & Solutions Client', ar: 'تسويق رقمي وحلول العملاء' },
-    org: 'Cat Planet · Doha, Qatar',
+    date: { en: 'Nov 2024 — May 2025', fr: 'Nov. 2024 — Mai 2025', ar: 'نوفمبر 2024 — مايو 2025' },
+    title: { en: 'Product / Digital Designer', fr: 'Product / Digital Designer', ar: 'مصمّم منتجات / رقمي' },
+    org: 'Cat Planet (Animal Nutrition & Health Center) · Doha, Qatar',
     body: {
-      en: 'Owned brand, digital campaigns and client experience, growing the customer base 70% with 90% retention.',
-      fr: "J'ai géré la marque, les campagnes digitales et l'expérience client, +70% de clientèle, 90% de rétention.",
-      ar: 'أدرت العلامة والحملات الرقمية وتجربة العميل، نمو العملاء 70% واحتفاظ 90%.',
+      en: 'Owned the end-to-end client experience and brand identity, driving user-centric improvements that grew the customer base 70%. Held client retention at 90% through consistent follow-up and relationship management, and planned and ran both digital and field campaigns from concept to execution.',
+      fr: "J'ai géré l'expérience client de bout en bout et l'identité de marque, avec des améliorations centrées utilisateur qui ont fait croître la clientèle de 70%. J'ai maintenu la rétention à 90% grâce à un suivi régulier et à la gestion de la relation, et j'ai planifié et mené les campagnes digitales et terrain, du concept à l'exécution.",
+      ar: 'أدرت تجربة العميل من البداية إلى النهاية وهوية العلامة، بتحسينات متمحورة حول المستخدم نمت قاعدة العملاء 70%. حافظت على الاحتفاظ بالعملاء عند 90% عبر متابعة مستمرة وإدارة للعلاقات، وخطّطت ونفّذت الحملات الرقمية والميدانية من الفكرة إلى التنفيذ.',
     },
   },
   {

@@ -34,7 +34,7 @@ export default function Resume() {
         <Reveal className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
           <div>
             <p className="eyebrow mb-3">{t.nav.resume}</p>
-            <h1 className="text-h1 font-semibold text-fg">{profile.name}</h1>
+            <h1 className="text-h1 font-semibold text-fg">{profile.fullName}</h1>
             <p className="mt-2 text-h3 font-medium text-fg-muted">{L(profile.title)}</p>
             <p className="mt-1 text-sm text-fg-subtle">
               {L(profile.location)} · {profile.contact.email}

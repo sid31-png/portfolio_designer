@@ -9,6 +9,7 @@ import type { Localized } from './types';
 
 export const profile = {
   name: 'Ahmed Bouamama',
+  fullName: 'Ahmed Abdelrahim Bouamama',
 
   // Repositioned design-first (brief §0/§9); front-end stays a strong second.
   title: {
@@ -48,16 +49,18 @@ export const profile = {
     ar: 'أُصمّم المنتجات وأبنيها.',
   } as Localized,
 
+  // Profile paragraphs taken from Ahmed's Product Designer CV (EN verbatim;
+  // FR/AR are faithful translations of his own bio — flagged for review).
   aboutParagraphs: [
     {
-      en: "I'm Ahmed, based in Doha. Across every role my work has stayed close to marketing and digital, and to building the internal software that makes a business run. From websites and brand to dashboards and internal tools, I design the experience and then write the front-end that ships it.",
-      fr: "Je suis Ahmed, basé à Doha. À chaque poste, mon travail est resté proche du marketing et du digital, et de la construction du logiciel interne qui fait tourner l'entreprise. Des sites et de la marque jusqu'aux dashboards et outils internes, je conçois l'expérience puis j'écris le front-end qui la met en ligne.",
-      ar: 'أنا أحمد، مقيم في الدوحة. في كل دور بقي عملي قريباً من التسويق والرقمي، ومن بناء البرمجيات الداخلية التي تُشغّل الأعمال. من المواقع والعلامة إلى لوحات التحكم والأدوات الداخلية، أُصمّم التجربة ثم أكتب الواجهة الأمامية التي تُطلقها.',
+      en: 'Product Designer & Front-End Developer based in Doha, dedicated to building digital experiences that put people first. I bridge the gap between user needs and clean code by sitting down with real users, mapping their workflows, and carrying those insights from wireframes to the final front-end that ships.',
+      fr: "Product Designer & développeur front-end basé à Doha, attaché à construire des expériences numériques qui placent les gens d'abord. Je fais le lien entre les besoins des utilisateurs et un code propre : je m'assois avec de vrais utilisateurs, je cartographie leurs workflows, et je porte ces enseignements du wireframe au front-end final qui part en production.",
+      ar: 'مصمّم منتجات ومطوّر واجهات أمامية مقيم في الدوحة، ملتزم ببناء تجارب رقمية تضع الإنسان أولاً. أصل بين احتياجات المستخدمين والكود النظيف: أجلس مع مستخدمين حقيقيين، وأرسم مسارات عملهم، وأنقل هذه الرؤى من التخطيط الأولي إلى الواجهة الأمامية النهائية التي تُطلق.',
     },
     {
-      en: 'Most recently I designed and built a full CRM/ERP for RCH — design system, screens and front-end — to manage clients, compliance and collections across two entities. I work the way the standard prescribes: human-centred design, ISO 9241-210, applied to real products people use every day.',
-      fr: "Récemment, j'ai conçu et développé un CRM/ERP complet pour RCH, design system, écrans et front-end, pour gérer clients, conformité et recouvrement sur deux entités. Je travaille comme le prescrit la norme : design centré utilisateur, ISO 9241-210, appliqué à de vrais produits utilisés au quotidien.",
-      ar: 'حديثاً صمّمت وطوّرت نظام CRM/ERP كاملاً لـ RCH، نظام تصميم وشاشات وواجهة أمامية، لإدارة العملاء والامتثال والتحصيل عبر كيانين. أعمل كما تنصّ المعايير: تصميم متمحور حول الإنسان، ISO 9241-210، مطبّق على منتجات حقيقية تُستخدم يومياً.',
+      en: 'By integrating AI as a collaborative partner to accelerate prototyping, I recently delivered a comprehensive internal CRM/ERP and a bilingual corporate website from the ground up. My end-to-end practice blends five years of cross-functional experience with a strict adherence to human-centred design principles (ISO 9241-210).',
+      fr: "En intégrant l'IA comme partenaire pour accélérer le prototypage, j'ai récemment livré un CRM/ERP interne complet et un site corporate bilingue, de zéro. Ma pratique de bout en bout mêle cinq ans d'expérience transverse à une adhésion stricte aux principes du design centré utilisateur (ISO 9241-210).",
+      ar: 'وبدمج الذكاء الاصطناعي كشريك لتسريع النمذجة، أنجزت مؤخراً نظام CRM/ERP داخلياً متكاملاً وموقعاً مؤسسياً ثنائي اللغة من الصفر. تمزج ممارستي الشاملة خمس سنوات من الخبرة متعددة الوظائف بالتزام صارم بمبادئ التصميم المتمحور حول الإنسان (ISO 9241-210).',
     },
   ] as Localized[],
 
