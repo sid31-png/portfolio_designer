@@ -30,7 +30,42 @@
     return a;
   }
 
+  /* ---------- Extra projects (Zest, Orizon) prepended to the Work grid ---------- */
+  var PROJECTS = [
+    { slug: 'orizon', name: 'Orizon', cat: 'Travel · High-fidelity UI/UX',
+      desc: 'A travel & stays booking experience — explore to checkout, confirmation and account, designed end to end.',
+      grad: 'linear-gradient(135deg,#0b2a3a,#12546e 55%,#2bb7c8)' },
+    { slug: 'zest', name: 'Zest', cat: 'Entertainment · UI/UX',
+      desc: 'A premium entertainment product, curated with energy — mobile, desktop, prototype and motion in one system.',
+      grad: 'linear-gradient(135deg,#2a0f3d,#7a1f6b 55%,#e6187f)' },
+  ]; // reverse order: prepending each puts Zest first, then Orizon
+
+  function buildCard(p) {
+    var a = document.createElement('a');
+    a.id = 'card-' + p.slug;
+    a.className = 'project-card';
+    a.href = BASE + 'work/' + p.slug;
+    a.setAttribute('data-tilt', 'project');
+    a.innerHTML =
+      '<div class="project-cover" style="background:' + p.grad + ';position:relative;display:grid;place-items:center;min-height:220px;">' +
+      '<span style="font:800 2.6rem/1 Inter,system-ui,sans-serif;letter-spacing:-.02em;color:#fff;">' + p.name + '</span>' +
+      '<span class="year-pill">2026</span></div>' +
+      '<div class="project-card-copy">' +
+      '<p class="project-category">' + p.cat + '</p><h3>' + p.name + '</h3><p>' + p.desc + '</p>' +
+      '<span class="project-link">Live Figma review <b aria-hidden="true">→</b></span></div>';
+    return a;
+  }
+
+  function ensureProjects() {
+    var sample = document.querySelector('.project-card');
+    if (!sample) return;
+    var grid = sample.parentNode;
+    if (!grid || document.getElementById('card-zest')) return;
+    PROJECTS.forEach(function (p) { grid.insertBefore(buildCard(p), grid.firstChild); });
+  }
+
   function ensure() {
+    ensureProjects();
     var contact = document.querySelector('.contact-actions');
     if (contact && !document.getElementById('cv-view')) {
       contact.appendChild(pill('cv-view', 'View CV', '↗', false));
