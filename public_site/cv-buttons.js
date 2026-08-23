@@ -33,11 +33,9 @@
   /* ---------- Extra projects (Zest, Orizon) prepended to the Work grid ---------- */
   var PROJECTS = [
     { slug: 'orizon', name: 'Orizon', cat: 'Travel · High-fidelity UI/UX',
-      desc: 'A travel & stays booking experience — explore to checkout, confirmation and account, designed end to end.',
-      grad: 'linear-gradient(135deg,#0b2a3a,#12546e 55%,#2bb7c8)' },
+      desc: 'A travel & stays booking experience — explore to checkout, confirmation and account, designed end to end.' },
     { slug: 'zest', name: 'Zest', cat: 'Entertainment · UI/UX',
-      desc: 'A premium entertainment product, curated with energy — mobile, desktop, prototype and motion in one system.',
-      grad: 'linear-gradient(135deg,#2a0f3d,#7a1f6b 55%,#e6187f)' },
+      desc: 'A premium entertainment product, curated with energy — mobile, desktop, prototype and motion in one system.' },
   ]; // reverse order: prepending each puts Zest first, then Orizon
 
   function buildCard(p) {
@@ -47,8 +45,9 @@
     a.href = BASE + 'work/' + p.slug;
     a.setAttribute('data-tilt', 'project');
     a.innerHTML =
-      '<div class="project-cover" style="background:' + p.grad + ';position:relative;display:grid;place-items:center;min-height:220px;">' +
-      '<span style="font:800 2.6rem/1 Inter,system-ui,sans-serif;letter-spacing:-.02em;color:#fff;">' + p.name + '</span>' +
+      '<div class="project-cover" style="position:relative;overflow:hidden;">' +
+      '<img src="' + BASE + 'projects/' + p.slug + '/cover.jpg" alt="' + p.name + ' product preview" loading="lazy" ' +
+      'style="display:block;width:100%;height:100%;aspect-ratio:16/10;object-fit:cover;">' +
       '<span class="year-pill">2026</span></div>' +
       '<div class="project-card-copy">' +
       '<p class="project-category">' + p.cat + '</p><h3>' + p.name + '</h3><p>' + p.desc + '</p>' +
