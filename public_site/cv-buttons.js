@@ -46,8 +46,8 @@
     a.setAttribute('data-tilt', 'project');
     a.innerHTML =
       '<div class="project-cover" style="position:relative;overflow:hidden;">' +
-      '<img src="' + BASE + 'projects/' + p.slug + '/cover.jpg" alt="' + p.name + ' product preview" loading="lazy" ' +
-      'style="display:block;width:100%;height:100%;aspect-ratio:16/10;object-fit:cover;">' +
+      '<img src="' + BASE + 'projects/' + p.slug + '/hero.jpg" alt="' + p.name + ' product preview" loading="lazy" ' +
+      'style="display:block;width:100%;height:100%;aspect-ratio:16/10;object-fit:cover;object-position:center;">' +
       '<span class="year-pill">2026</span></div>' +
       '<div class="project-card-copy">' +
       '<p class="project-category">' + p.cat + '</p><h3>' + p.name + '</h3><p>' + p.desc + '</p>' +
