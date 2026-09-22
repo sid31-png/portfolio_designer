@@ -4,9 +4,146 @@
   let menuButton;
   let menuSheet;
   let menuBackdrop;
+  let lockedScrollY = null;
+  let keyboardResizeFrame = 0;
+  const CHAT_HISTORY_KEY = 'ahmed-portfolio-assistant-history-v1';
 
   const getAssistantTrigger = () => document.querySelector('.assistant-trigger');
   const getAssistantPanel = () => document.querySelector('.assistant-panel');
+
+  function readChatHistory() {
+    try {
+      const saved = JSON.parse(sessionStorage.getItem(CHAT_HISTORY_KEY) || '[]');
+      return Array.isArray(saved) ? saved : [];
+    } catch (_) { return []; }
+  }
+
+  function writeChatHistory(messages) {
+    try { sessionStorage.setItem(CHAT_HISTORY_KEY, JSON.stringify(messages)); } catch (_) {}
+  }
+
+  function lockPortfolioScroll() {
+    if (lockedScrollY !== null) return;
+    lockedScrollY = window.scrollY || window.pageYOffset || 0;
+    document.documentElement.classList.add('assistant-page-locked');
+    document.body.style.top = `-${lockedScrollY}px`;
+  }
+
+  function unlockPortfolioScroll() {
+    if (lockedScrollY === null) return;
+    const restoreY = lockedScrollY;
+    lockedScrollY = null;
+    document.body.style.top = '';
+    document.documentElement.classList.remove('assistant-page-locked');
+    window.scrollTo(0, restoreY);
+  }
+
+  function scrollConversation(panel, behavior = 'auto') {
+    const messages = panel?.querySelector('.assistant-messages');
+    if (!messages) return;
+    const move = () => { messages.scrollTop = messages.scrollHeight; };
+    move();
+    requestAnimationFrame(move);
+    if (behavior === 'smooth' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      messages.scrollTo({ top: messages.scrollHeight, behavior: 'smooth' });
+    }
+  }
+
+  function syncAssistantViewport() {
+    const panel = getAssistantPanel();
+    if (!panel || !phoneQuery.matches) return;
+    const viewport = window.visualViewport;
+    const viewportHeight = Math.round(viewport?.height || window.innerHeight);
+    const viewportTop = Math.round(viewport?.offsetTop || 0);
+    const available = Math.max(260, viewportHeight - 16 - viewportTop);
+    const keyboardOpen = viewportHeight < window.innerHeight - 120;
+    panel.style.setProperty('--assistant-viewport-top', `${viewportTop}px`);
+    panel.style.setProperty('--assistant-available-height', `${available}px`);
+    panel.classList.toggle('is-keyboard-open', keyboardOpen);
+    scrollConversation(panel);
+  }
+
+  function scheduleAssistantViewportSync() {
+    cancelAnimationFrame(keyboardResizeFrame);
+    keyboardResizeFrame = requestAnimationFrame(syncAssistantViewport);
+  }
+
+  function defaultAssistantReply(question) {
+    const value = question.toLowerCase().trim();
+    if (/\b(hello|hi|hey|bonjour|salut)\b/.test(value)) return 'Hello! I’m here and I remember this conversation. Ask me about Ahmed’s projects, services, experience, or contact details.';
+    if (/(contact|email|mail|whatsapp|phone|call)/.test(value)) return 'You can contact Ahmed by email at ahmedbouamama3105@gmail.com or on WhatsApp at +974 5031 4732.';
+    if (/(service|skill|offer|what do)/.test(value)) return 'Ahmed offers product design, UX/UI, research, design systems, React front-end delivery, bilingual EN/AR and RTL design, plus AI-accelerated prototyping.';
+    if (/(project|portfolio|work|zest|orizon|docuverse|pilo|lingua|agropulse|dosia)/.test(value)) return 'You can explore Ahmed’s case studies in the Selected work section. They cover product design, AI, mobility, healthcare, language learning and more.';
+    if (/(experience|about|based|doha|process)/.test(value)) return 'Ahmed is an AI Product Enabler and Product Designer based in Doha. His process goes from research and UX to systems, prototypes and front-end delivery.';
+    return 'Thanks for your message. I can help with Ahmed’s projects, services, design process, experience, or contact details.';
+  }
+
+  function messageNode(from, text) {
+    const node = document.createElement('div');
+    node.className = `assistant-message is-${from}`;
+    node.dataset.mobileChatMessage = 'true';
+    const paragraph = document.createElement('p');
+    paragraph.textContent = text;
+    node.append(paragraph);
+    return node;
+  }
+
+  function restoreChatHistory(panel) {
+    const messages = panel?.querySelector('.assistant-messages');
+    if (!messages) return;
+    const saved = readChatHistory();
+    if (!saved.length) {
+      const welcome = messages.querySelector('.assistant-message.is-assistant p')?.textContent?.trim();
+      if (welcome) writeChatHistory([{ from: 'assistant', text: welcome }]);
+      return;
+    }
+    if (messages.querySelector('[data-mobile-chat-message]')) return;
+    saved.slice(1).forEach((message) => messages.append(messageNode(message.from, message.text)));
+    scrollConversation(panel);
+  }
+
+  function sendMobileChatMessage(text) {
+    const panel = getAssistantPanel();
+    const messages = panel?.querySelector('.assistant-messages');
+    const value = text.trim();
+    if (!panel || !messages || !value) return;
+    const history = readChatHistory();
+    const welcome = messages.querySelector('.assistant-message.is-assistant p')?.textContent?.trim();
+    if (!history.length && welcome) history.push({ from: 'assistant', text: welcome });
+    const answer = defaultAssistantReply(value);
+    history.push({ from: 'visitor', text: value }, { from: 'assistant', text: answer });
+    writeChatHistory(history);
+    messages.append(messageNode('visitor', value), messageNode('assistant', answer));
+    scrollConversation(panel, 'smooth');
+  }
+
+  function interceptMobileChat(event) {
+    if (!phoneQuery.matches) return;
+    const form = event.target?.closest?.('.assistant-form');
+    if (!form) return;
+    const input = form.querySelector('input');
+    const value = input?.value || '';
+    if (!value.trim()) return;
+    // Handle the message before React's delegated submit handler. This avoids
+    // resetting the conversation when the portal re-renders on mobile.
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    event.stopPropagation();
+    sendMobileChatMessage(value);
+    input.value = '';
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    input.focus({ preventScroll: true });
+  }
+
+  function interceptQuickQuestion(event) {
+    if (!phoneQuery.matches) return;
+    const button = event.target?.closest?.('.assistant-suggestions button');
+    if (!button) return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    event.stopPropagation();
+    sendMobileChatMessage(button.textContent || '');
+  }
 
   function setTextIfChanged(element, value) {
     if (element && element.textContent !== value) element.textContent = value;
@@ -72,7 +209,7 @@
 
   function installMenu() {
     const dock = document.querySelector('.header-dock');
-    if (!dock || menuButton) return;
+    if (!dock || menuButton || !mobileQuery.matches) return;
 
     menuButton = document.createElement('button');
     menuButton.type = 'button';
@@ -94,6 +231,7 @@
     if (!panel) {
       document.querySelector('.assistant-modal-backdrop')?.remove();
       document.body.classList.remove('assistant-open');
+      unlockPortfolioScroll();
       return;
     }
 
@@ -104,6 +242,9 @@
 
     if (phoneQuery.matches) {
       document.body.classList.add('assistant-open');
+      lockPortfolioScroll();
+      restoreChatHistory(panel);
+      syncAssistantViewport();
       if (!document.querySelector('.assistant-modal-backdrop')) {
         const backdrop = document.createElement('div');
         backdrop.className = 'assistant-modal-backdrop';
@@ -143,8 +284,26 @@
     }
     trapFocus(event);
   });
-  mobileQuery.addEventListener('change', () => { if (!mobileQuery.matches) closeMenu({ returnFocus: false }); });
-  phoneQuery.addEventListener('change', installAssistantAccessibility);
+  document.addEventListener('submit', interceptMobileChat, true);
+  document.addEventListener('click', interceptQuickQuestion, true);
+  document.addEventListener('focusin', (event) => {
+    if (event.target?.matches?.('.assistant-form input')) scheduleAssistantViewportSync();
+  });
+  window.visualViewport?.addEventListener('resize', scheduleAssistantViewportSync);
+  window.visualViewport?.addEventListener('scroll', scheduleAssistantViewportSync);
+  window.addEventListener('resize', scheduleAssistantViewportSync);
+  mobileQuery.addEventListener('change', () => {
+    if (!mobileQuery.matches) {
+      closeMenu({ returnFocus: false });
+      menuButton?.remove();
+      menuButton = undefined;
+    } else installMenu();
+  });
+  phoneQuery.addEventListener('change', () => {
+    installAssistantAccessibility();
+    if (!phoneQuery.matches) unlockPortfolioScroll();
+    else scheduleAssistantViewportSync();
+  });
 
   observer.observe(document.body, { childList: true, subtree: true });
   installMenu();

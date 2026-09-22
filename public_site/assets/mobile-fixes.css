@@ -56,15 +56,19 @@
   /* The assistant is a real mobile modal, above every page layer. */
   .assistant-panel {
     z-index: 1000 !important;
-    top: auto !important;
+    /* visualViewport values are maintained by mobile-fixes.js.  They shrink
+       with the soft keyboard, so the panel never sits behind it. */
+    top: calc(var(--assistant-viewport-top, 0px) + max(8px, env(safe-area-inset-top))) !important;
     right: 12px !important;
-    bottom: max(12px, env(safe-area-inset-bottom)) !important;
+    bottom: auto !important;
     left: 12px !important;
     width: auto !important;
-    height: min(68dvh, 560px) !important;
-    max-height: calc(100dvh - 24px - env(safe-area-inset-top) - env(safe-area-inset-bottom)) !important;
+    height: min(560px, var(--assistant-available-height, calc(100dvh - 24px))) !important;
+    max-height: var(--assistant-available-height, calc(100dvh - 24px)) !important;
     border-radius: 24px !important;
     isolation: isolate;
+    overscroll-behavior: contain;
+    touch-action: pan-y;
   }
 
   .assistant-modal-backdrop {
@@ -76,7 +80,19 @@
     -webkit-backdrop-filter: blur(5px);
   }
 
-  body.assistant-open { overflow: hidden; }
+  html.assistant-page-locked,
+  body.assistant-open {
+    overscroll-behavior: none;
+  }
+
+  /* Fixed page locking prevents iOS from scrolling the portfolio when the
+     input receives focus or when the conversation reaches an edge. */
+  body.assistant-open {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    overflow: hidden;
+  }
 
   .assistant-header { min-height: 72px; padding: 14px 16px; }
 
@@ -93,6 +109,8 @@
     min-height: 0;
     flex: 1 1 auto;
     overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
   }
 
   .assistant-suggestions { padding: 14px 16px; }
@@ -109,6 +127,10 @@
   }
 
   .assistant-form input { min-height: 44px; }
+
+  .assistant-panel.is-keyboard-open {
+    border-radius: 20px !important;
+  }
 
   .assistant-trigger { position: relative; z-index: 61; }
 
