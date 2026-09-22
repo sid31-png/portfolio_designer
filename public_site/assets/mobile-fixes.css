@@ -1,1 +1,145 @@
+/* Mobile interaction repair layer — loaded after the static export. */
 
+@media (max-width: 800px) {
+  .mobile-menu-trigger {
+    z-index: 60;
+    width: 48px;
+    height: 48px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--nav-background-compact);
+    color: var(--ink);
+    box-shadow: 0 12px 30px var(--shadow);
+    display: grid;
+    place-items: center;
+    flex: 0 0 48px;
+    cursor: pointer;
+  }
+
+  .mobile-menu-trigger svg { width: 20px; height: 20px; }
+
+  .mobile-menu-backdrop {
+    position: fixed;
+    z-index: 880;
+    inset: 0;
+    background: rgb(4 7 5 / 0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .mobile-menu-sheet {
+    position: fixed;
+    z-index: 900;
+    top: max(12px, env(safe-area-inset-top));
+    right: 12px;
+    left: 12px;
+    border: 1px solid var(--border-strong);
+    border-radius: 24px;
+    background: var(--surface);
+    box-shadow: 0 24px 70px var(--shadow-strong);
+    padding: 16px;
+  }
+
+  .mobile-menu-sheet a {
+    display: flex;
+    min-height: 48px;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    color: var(--ink);
+    font: 700 1rem/1 Manrope, Inter, system-ui, sans-serif;
+  }
+
+  .mobile-menu-sheet a:last-child { border-bottom: 0; }
+}
+
+@media (max-width: 540px) {
+  /* The assistant is a real mobile modal, above every page layer. */
+  .assistant-panel {
+    z-index: 1000 !important;
+    top: auto !important;
+    right: 12px !important;
+    bottom: max(12px, env(safe-area-inset-bottom)) !important;
+    left: 12px !important;
+    width: auto !important;
+    height: min(68dvh, 560px) !important;
+    max-height: calc(100dvh - 24px - env(safe-area-inset-top) - env(safe-area-inset-bottom)) !important;
+    border-radius: 24px !important;
+    isolation: isolate;
+  }
+
+  .assistant-modal-backdrop {
+    position: fixed;
+    z-index: 990;
+    inset: 0;
+    background: rgb(7 10 8 / 0.48);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+  }
+
+  body.assistant-open { overflow: hidden; }
+
+  .assistant-header { min-height: 72px; padding: 14px 16px; }
+
+  .assistant-header button,
+  .assistant-form button {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    flex: 0 0 44px;
+  }
+
+  .assistant-messages {
+    min-height: 0;
+    flex: 1 1 auto;
+    overscroll-behavior: contain;
+  }
+
+  .assistant-suggestions { padding: 14px 16px; }
+  .assistant-suggestions > div { gap: 8px; }
+
+  .assistant-suggestions button {
+    min-height: 44px;
+    padding: 10px 14px;
+  }
+
+  .assistant-form {
+    min-height: 68px;
+    padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+  }
+
+  .assistant-form input { min-height: 44px; }
+
+  .assistant-trigger { position: relative; z-index: 61; }
+
+  .talk-button {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .site-logo {
+    min-width: 44px;
+    min-height: 44px;
+    display: grid;
+    place-items: center;
+  }
+
+  .theme-toggle {
+    z-index: 70;
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .assistant-panel,
+  .mobile-menu-sheet,
+  .mobile-menu-backdrop,
+  .assistant-modal-backdrop {
+    animation: none !important;
+    transition: none !important;
+  }
+}
