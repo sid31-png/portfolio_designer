@@ -6,6 +6,7 @@
   let menuBackdrop;
   let lockedScrollY = null;
   let keyboardResizeFrame = 0;
+  let viewportLayoutHeight = window.innerHeight;
   const CHAT_HISTORY_KEY = 'ahmed-portfolio-assistant-history-v1';
 
   const getAssistantTrigger = () => document.querySelector('.assistant-trigger');
@@ -27,6 +28,8 @@
     lockedScrollY = window.scrollY || window.pageYOffset || 0;
     document.documentElement.classList.add('assistant-page-locked');
     document.body.style.top = `-${lockedScrollY}px`;
+    document.body.style.left = '0';
+    document.body.style.right = '0';
   }
 
   function unlockPortfolioScroll() {
@@ -34,6 +37,8 @@
     const restoreY = lockedScrollY;
     lockedScrollY = null;
     document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
     document.documentElement.classList.remove('assistant-page-locked');
     window.scrollTo(0, restoreY);
   }
@@ -55,9 +60,15 @@
     const viewport = window.visualViewport;
     const viewportHeight = Math.round(viewport?.height || window.innerHeight);
     const viewportTop = Math.round(viewport?.offsetTop || 0);
-    const available = Math.max(260, viewportHeight - 16 - viewportTop);
-    const keyboardOpen = viewportHeight < window.innerHeight - 120;
-    panel.style.setProperty('--assistant-viewport-top', `${viewportTop}px`);
+    /* iOS keeps the layout viewport while shrinking visualViewport. Keep the
+       largest recent layout height as the reference for keyboard size. */
+    if (viewportHeight >= viewportLayoutHeight - 80) {
+      viewportLayoutHeight = Math.max(viewportLayoutHeight, window.innerHeight, viewportHeight + viewportTop);
+    }
+    const keyboardOffset = Math.max(0, viewportLayoutHeight - viewportHeight - viewportTop);
+    const keyboardOpen = keyboardOffset > 80;
+    const available = Math.max(200, viewportHeight - 16);
+    panel.style.setProperty('--assistant-keyboard-offset', `${keyboardOffset}px`);
     panel.style.setProperty('--assistant-available-height', `${available}px`);
     panel.classList.toggle('is-keyboard-open', keyboardOpen);
     scrollConversation(panel);
@@ -66,6 +77,16 @@
   function scheduleAssistantViewportSync() {
     cancelAnimationFrame(keyboardResizeFrame);
     keyboardResizeFrame = requestAnimationFrame(syncAssistantViewport);
+  }
+
+  function sendFromInput(input) {
+    const value = input?.value || '';
+    if (!value.trim()) return false;
+    sendMobileChatMessage(value);
+    input.value = '';
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    input.focus({ preventScroll: true });
+    return true;
   }
 
   function defaultAssistantReply(question) {
@@ -122,17 +143,42 @@
     const form = event.target?.closest?.('.assistant-form');
     if (!form) return;
     const input = form.querySelector('input');
-    const value = input?.value || '';
-    if (!value.trim()) return;
+    if (!input?.value?.trim()) return;
     // Handle the message before React's delegated submit handler. This avoids
     // resetting the conversation when the portal re-renders on mobile.
     event.preventDefault();
     event.stopImmediatePropagation();
     event.stopPropagation();
-    sendMobileChatMessage(value);
-    input.value = '';
-    input.dispatchEvent(new Event('input', { bubbles: true }));
-    input.focus({ preventScroll: true });
+    sendFromInput(input);
+  }
+
+  function interceptSendButton(event) {
+    if (!phoneQuery.matches) return;
+    const button = event.target?.closest?.('.assistant-form button');
+    if (!button) return;
+    const input = button.closest('.assistant-form')?.querySelector('input');
+    if (!input?.value?.trim()) return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    event.stopPropagation();
+    sendFromInput(input);
+  }
+
+  function interceptSendKey(event) {
+    if (!phoneQuery.matches || event.key !== 'Enter' || event.isComposing) return;
+    const input = event.target?.closest?.('.assistant-form input');
+    if (!input?.value?.trim()) return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    event.stopPropagation();
+    sendFromInput(input);
+  }
+
+  function preventBackgroundScroll(event) {
+    if (!phoneQuery.matches || !document.body.classList.contains('assistant-open')) return;
+    const messages = getAssistantPanel()?.querySelector('.assistant-messages');
+    if (messages?.contains(event.target)) return;
+    event.preventDefault();
   }
 
   function interceptQuickQuestion(event) {
@@ -285,7 +331,11 @@
     trapFocus(event);
   });
   document.addEventListener('submit', interceptMobileChat, true);
+  document.addEventListener('click', interceptSendButton, true);
   document.addEventListener('click', interceptQuickQuestion, true);
+  document.addEventListener('keydown', interceptSendKey, true);
+  document.addEventListener('touchmove', preventBackgroundScroll, { capture: true, passive: false });
+  document.addEventListener('wheel', preventBackgroundScroll, { capture: true, passive: false });
   document.addEventListener('focusin', (event) => {
     if (event.target?.matches?.('.assistant-form input')) scheduleAssistantViewportSync();
   });

@@ -58,9 +58,10 @@
     z-index: 1000 !important;
     /* visualViewport values are maintained by mobile-fixes.js.  They shrink
        with the soft keyboard, so the panel never sits behind it. */
-    top: calc(var(--assistant-viewport-top, 0px) + max(8px, env(safe-area-inset-top))) !important;
+    top: auto !important;
     right: 12px !important;
-    bottom: auto !important;
+    /* The bottom edge follows the top of the software keyboard. */
+    bottom: calc(8px + env(safe-area-inset-bottom) + var(--assistant-keyboard-offset, 0px)) !important;
     left: 12px !important;
     width: auto !important;
     height: min(560px, var(--assistant-available-height, calc(100dvh - 24px))) !important;
@@ -69,6 +70,7 @@
     isolation: isolate;
     overscroll-behavior: contain;
     touch-action: pan-y;
+    transition: height 180ms ease, bottom 180ms ease, border-radius 180ms ease;
   }
 
   .assistant-modal-backdrop {
@@ -91,6 +93,7 @@
     position: fixed;
     inset: 0;
     width: 100%;
+    height: 100%;
     overflow: hidden;
   }
 
@@ -111,6 +114,7 @@
     overscroll-behavior: contain;
     -webkit-overflow-scrolling: touch;
     touch-action: pan-y;
+    overflow-y: auto !important;
   }
 
   .assistant-suggestions { padding: 14px 16px; }
@@ -130,6 +134,16 @@
 
   .assistant-panel.is-keyboard-open {
     border-radius: 20px !important;
+  }
+
+  /* On a keyboard-sized viewport, quick actions are the first content to
+     yield. Header, message list and composer always stay available. */
+  .assistant-panel.is-keyboard-open .assistant-suggestions {
+    display: none;
+  }
+
+  .assistant-panel.is-keyboard-open .assistant-messages {
+    padding-bottom: 12px;
   }
 
   .assistant-trigger { position: relative; z-index: 61; }
