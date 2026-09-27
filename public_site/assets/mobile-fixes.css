@@ -204,16 +204,6 @@
   }
 }
 
-/* Restore the previous portfolio entry: bypass only the initial quote screen.
-   The ordinary exit transition remains available for the rest of the site. */
-html.motion-ready:not(.motion-loaded) .page-curtain {
-  display: none !important;
-}
-
-html.is-leaving .page-curtain {
-  display: grid !important;
-}
-
 @media (prefers-reduced-motion: reduce) {
   .assistant-panel,
   .mobile-menu-sheet,
