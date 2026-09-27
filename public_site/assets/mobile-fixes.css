@@ -148,6 +148,16 @@
 
   .assistant-trigger { position: relative; z-index: 61; }
 
+  /* The stat items stack on phones. Their desktop accent rule was positioned
+     relative to the previous row and crossed the last line of its label. */
+  .stats-grid > div::after {
+    top: -16px;
+  }
+
+  .stats-grid {
+    gap: 40px;
+  }
+
   .talk-button {
     min-height: 44px;
     display: inline-flex;
